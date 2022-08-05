@@ -1,3 +1,5 @@
+import re
+
 from validate_docbr import CPF
 import mysql.connector
 
@@ -27,36 +29,67 @@ def valida_cpf(cliente_cpf):
         return validador.validate(cliente_cpf)
     raise ValueError("CPF Inválido: ")
 
-def retorna_sexo():
-    pass
+def valida_sexo(cliente_sexo):
+    if cliente_sexo == "Masculino":
+        return cliente_sexo
+    elif cliente_sexo == "Feminino":
+        return cliente_sexo
+    elif cliente_sexo == "Outro":
+        return cliente_sexo
+    raise ValueError("Selecione o sexo!")
 
 def valida_telefone(cliente_telefone):
-    pass
+    cliente_telefone = str(cliente_telefone)
+    if len(cliente_telefone) == 11:
+        return cliente_telefone
+    raise ValueError("Digite um telefone correto exemplo: xx xxxxx-xxxx")
 
 def valida_cep(cliente_cep):
-    pass
+    cliente_cep = str(cliente_cep)
+    if len(cliente_cep) == 8:
+        return cliente_cep
+    raise ValueError("Digite um CEP Válido!")
 
 def valida_rua(cliente_rua):
-    pass
+    cliente_rua.isalpha()
+    if cliente_rua:
+        return cliente_rua
+    raise ValueError("Digite o nome da rua!")
 
 def valida_bairro(cliente_bairro):
-    pass
+    cliente_bairro.isalpha()
+    if cliente_bairro:
+        return cliente_bairro
+    raise ValueError("Digite o nome do bairro!")
 
 def valida_numero(cliente_num):
-    pass
+    cliente_num.isalpha()
+    if cliente_num:
+        return cliente_num
+    raise ValueError("Digite o número da residência!")
 
 def valida_uf(cliente_uf):
-    pass
+    cliente_uf.isalpha()
+    if cliente_uf:
+        return cliente_uf
+    raise ValueError("Digite o nome do Estado!")
 
 def valida_cidade(cliente_cidade):
-    pass
+    cliente_cidade.isalpha()
+    if cliente_cidade:
+        return cliente_cidade
+    raise ValueError("Digite o nome da Cidade!")
 
 def valida_email(cliente_email):
-    pass
+    validacao = re.compile("[a-z]{1,100}([0-9])?@[a-z]{0,100}([0-9]?).com(.br)?")
+    search = validacao.search(cliente_email)
+    if search:
+        return cliente_email
+    raise ValueError("Digite um email válido!")
 
-cpf = "03546800133"
-valida_cpf(cpf)
-print(cpf)
+cliente_email = "rrerwe1993a@ffa1.com"
+valida_email(cliente_email)
+print(cliente_email)
 
 '''
 cpf = (input("Digite o CPF: "))
